@@ -60,11 +60,16 @@ const benefits = [
   },
 ];
 
+import electronicsImg from "../../../assets/electronics.jpg";
+import mensClothingImg from "../../../assets/mens-clothing.jpg";
+import womensClothingImg from "../../../assets/womens-clothing.jpg";
+import jeweleryImg from "../../../assets/jewelery.jpg";
+
 const categoryImages = {
-  electronics: "src/assets/electronics.jpg",
-  "men's clothing": "src/assets/mens-clothing.jpg",
-  "women's clothing": "src/assets/womens-clothing.jpg",
-  jewelery: "src/assets/jewelery.jpg",
+  electronics: electronicsImg,
+  "men's clothing": mensClothingImg,
+  "women's clothing": womensClothingImg,
+  jewelery: jeweleryImg,
 };
 
 const LandingPage = () => {

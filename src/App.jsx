@@ -16,7 +16,7 @@ import OrderSuccessPage from "./common/pages/ordersuccess/OrderSuccess";
 function App() {
   return (
     <div className="app">
-      <BrowserRouter>
+      <BrowserRouter basename="/ecommerce-site">
         <ScrollToTop />
         <Navbar />
         <Routes>
