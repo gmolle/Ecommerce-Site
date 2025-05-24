@@ -29,7 +29,7 @@ const Cart = () => {
   }, [cartItems]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 min-h-[calc(100vh-153px)] text-gray-900">
+    <div className="max-w-7xl mx-auto px-4 mb-10 min-h-[calc(100vh-153px)] text-gray-900">
       <ToastContainer position="top-left" autoClose={4000} transition={Slide} />
 
       {/* Header full width */}
