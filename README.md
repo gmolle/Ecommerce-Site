@@ -2,7 +2,9 @@
 
 A complete online shopping platform that allows users to browse products, manage their cart, and securely place orders. Designed to deliver a smooth and engaging shopping experience from browsing to checkout.
 
-![Pathfinding Visualizer Demo](public/screenshots/1.png)
+View the deployed project [here](https://gmolle.github.io/Ecommerce-Site/)
+
+![Ecommerce Site](public/screenshots/1.png)
 
 ---
 
