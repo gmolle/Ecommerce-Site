@@ -8,4 +8,5 @@ export default defineConfig({
   css: {
     postcss: "./postcss.config.js", // Make sure Vite is pointing to the correct PostCSS config
   },
+  base: "Ecommerce-Site",
 });
