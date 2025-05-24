@@ -85,10 +85,6 @@ const LandingPage = () => {
     }
   }, [dispatch, categories]);
 
-  if (!categories || categories.length === 0) {
-    return <p className="text-center py-10">Loading categories...</p>;
-  }
-
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero */}
@@ -124,27 +120,31 @@ const LandingPage = () => {
         <h2 className="text-3xl font-bold mb-10 text-center">
           Shop by Category
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto px-6">
-          {categories?.map((cat) => (
-            <Link
-              key={cat}
-              to={`/products?category=${encodeURIComponent(cat)}`}
-              className="group cursor-pointer rounded-lg overflow-hidden shadow-md hover:shadow-xl transition"
-            >
-              <div className="h-48 bg-gray-100 overflow-hidden">
-                <img
-                  src={categoryImages[cat]}
-                  alt={cat}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-lg font-semibold text-center mt-4 mb-2">
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
-              </h3>
-            </Link>
-          ))}
-        </div>
+        {!categories || categories.length === 0 ? (
+          <p className="text-center py-10">Loading categories...</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto px-6">
+            {categories?.map((cat) => (
+              <Link
+                key={cat}
+                to={`/products?category=${encodeURIComponent(cat)}`}
+                className="group cursor-pointer rounded-lg overflow-hidden shadow-md hover:shadow-xl transition"
+              >
+                <div className="h-48 bg-gray-100 overflow-hidden">
+                  <img
+                    src={categoryImages[cat]}
+                    alt={cat}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                <h3 className="text-lg font-semibold text-center mt-4 mb-2">
+                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </h3>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Benefits */}
