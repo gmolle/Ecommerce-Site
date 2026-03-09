@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { changeQuantity, removeSpecificItem } from "../products/productSlice";
 
 const CartProduct = ({ product, quantity, notify }) => {
@@ -36,51 +37,70 @@ const CartProduct = ({ product, quantity, notify }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center md:items-start bg-white shadow-md rounded-lg p-4 gap-4 md:gap-6">
-      {/* Product Image */}
-      <div className="w-[180px] h-[180px] bg-white rounded shadow p-4 flex items-center justify-center">
+    <article className="group flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 bg-white rounded-2xl border border-slate-200/90 p-5 sm:p-6 shadow-soft hover:shadow-soft-lg hover:border-slate-300/80 transition-all duration-300">
+      <Link
+        to={`/product/${product.serialNum}`}
+        className="w-full sm:w-40 h-40 sm:h-40 bg-slate-50 rounded-xl flex items-center justify-center shrink-0 overflow-hidden cursor-pointer"
+      >
         <img
           src={product.image}
           alt={product.title}
-          className="w-[180px] h-[180px] object-contain rounded"
+          className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
         />
-      </div>
+      </Link>
 
-      {/* Product Details */}
-      <div className="flex flex-col flex-grow">
-        <div className="flex justify-between items-start">
-          <h2 className="text-lg font-semibold text-gray-900">
-            {product.title}
-          </h2>
+      <div className="flex flex-col flex-grow min-w-0">
+        <div className="flex justify-between items-start gap-3">
+          <div className="min-w-0">
+            {product.category && (
+              <p className="text-xs font-medium text-teal-600 uppercase tracking-wide mb-0.5">
+                {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
+              </p>
+            )}
+            <Link
+              to={`/product/${product.serialNum}`}
+              className="text-base sm:text-lg font-semibold text-slate-900 line-clamp-2 hover:text-teal-600 transition-colors cursor-pointer"
+            >
+              {product.title}
+            </Link>
+          </div>
           <button
             onClick={removeItem}
             aria-label="Remove item"
-            className="text-gray-400 hover:text-red-600 transition-colors"
+            className="text-slate-400 hover:text-red-600 transition-colors shrink-0 p-2 -m-2 rounded-xl hover:bg-red-50 cursor-pointer"
           >
-            <i className="fa-solid fa-xmark text-xl"></i>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </button>
         </div>
 
-        <div className="max-w-100">
-          <p className="line-clamp-4">{product.description}</p>
-        </div>
+        <p className="line-clamp-2 text-slate-500 text-sm mt-2 leading-relaxed">{product.description}</p>
 
-        <div className="mt-3 flex items-center justify-between md:justify-start gap-6">
-          <p className="text-lg font-medium text-indigo-700">
+        <div className="mt-5 pt-4 border-t border-slate-100 flex flex-wrap items-center gap-x-4 gap-y-3">
+          <p className="text-xl font-bold text-slate-900 tabular-nums">
             ${(product.price * quantity).toFixed(2)}
           </p>
-
-          <select
-            value={amount}
-            onChange={quantityChange}
-            className="border border-gray-300 rounded px-3 py-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            aria-label="Change quantity"
-          >
-            {quantityDropdown()}
-          </select>
+          <span className="text-slate-400 text-sm">
+            ${product.price.toFixed(2)} × {quantity}
+          </span>
+          <div className="ml-auto flex items-center gap-2">
+            <label htmlFor={`qty-${product.serialNum}`} className="text-xs font-medium text-slate-500 uppercase tracking-wide">
+              Qty
+            </label>
+            <select
+              id={`qty-${product.serialNum}`}
+              value={amount}
+              onChange={quantityChange}
+              className="border border-slate-200 rounded-xl px-3 py-2 text-slate-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 bg-white cursor-pointer"
+              aria-label="Change quantity"
+            >
+              {quantityDropdown()}
+            </select>
+          </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

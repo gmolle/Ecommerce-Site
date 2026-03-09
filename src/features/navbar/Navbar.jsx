@@ -68,52 +68,59 @@ const Navbar = () => {
   };
 
   return (
-    <div className="sticky top-0 z-50 bg-white/70 backdrop-blur border-b border-gray-300 transition-all duration-150">
-      <nav className="max-w-7xl h-12 mx-auto px-4 flex items-center justify-between">
-        {/* Left side - Home link */}
-        <div className="flex items-center gap-6">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `text-lg ${isActive ? "font-bold" : ""} text-gray-800`
-            }
-          >
-            Home
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
+      <nav className="site-container h-16 flex items-center justify-between gap-4">
+        {/* Left - Brand + Nav */}
+        <div className="flex items-center gap-10">
+          <NavLink to="/" className="font-bold text-xl text-slate-900 hover:text-slate-700 transition-colors cursor-pointer">
+            Store
           </NavLink>
-          <NavLink
-            to="/products"
-            className={({ isActive }) =>
-              `text-lg ${isActive ? "font-bold" : ""} text-gray-800`
-            }
-          >
-            Products
-          </NavLink>
+          <div className="flex items-center gap-4 sm:gap-6">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `text-sm font-medium transition-colors cursor-pointer ${
+                  isActive ? "text-teal-600" : "text-slate-600 hover:text-slate-900"
+                }`
+              }
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/products"
+              className={({ isActive }) =>
+                `text-sm font-medium transition-colors cursor-pointer ${
+                  isActive ? "text-teal-600" : "text-slate-600 hover:text-slate-900"
+                }`
+              }
+            >
+              Products
+            </NavLink>
+          </div>
         </div>
 
         {/* Right side - Search, Cart */}
-        <div className="flex items-center gap-6 relative">
-          {pathname == "/products" || pathname == "/admin" ? (
-            ""
-          ) : (
+        <div className="flex items-center gap-4 md:gap-6">
+          {pathname !== "/products" && pathname !== "/admin" && (
             <input
               type="text"
               value={localSearch}
               placeholder="Search products..."
               onChange={onInputChange}
               onKeyDown={onInputKeyDown}
-              className="border border-gray-300 rounded-md px-3 py-1.5 w-[150px] md:w-[250px] focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors bg-white text-gray-900"
+              className="hidden sm:block border border-slate-200 rounded-lg px-4 py-2 w-[140px] md:w-[220px] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all bg-slate-50 text-slate-900 placeholder:text-slate-400"
             />
           )}
 
           <NavLink
             to="/cart"
             className={({ isActive }) =>
-              `text-gray-800 text-xl ${isActive ? "font-bold" : ""}`
+              `text-slate-600 hover:text-slate-900 text-lg transition-colors cursor-pointer ${isActive ? "text-teal-600" : ""}`
             }
           >
             <i className="fa-solid fa-cart-shopping relative">
               {cartItems.length > 0 && (
-                <span className="absolute -top-1 left-3 bg-indigo-600 text-white text-xs px-1.5 rounded-full">
+                <span className="absolute -top-1.5 left-3.5 bg-teal-600 text-white text-xs font-medium min-w-[18px] h-[18px] flex items-center justify-center rounded-full">
                   {cartItemTotal()}
                 </span>
               )}
@@ -121,7 +128,7 @@ const Navbar = () => {
           </NavLink>
         </div>
       </nav>
-    </div>
+    </header>
   );
 };
 

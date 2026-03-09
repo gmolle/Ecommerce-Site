@@ -100,7 +100,7 @@ const AdminAddProduct = ({ handleOverlay }) => {
             )}
           </div>
 
-          <button className="update-item-btn" onClick={addItem}>
+          <button className="update-item-btn cursor-pointer" onClick={addItem}>
             Add Item
           </button>
           {updated && <p className="update-text">Item Added</p>}

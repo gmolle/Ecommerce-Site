@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import OrderSummary from "../../../features/cart/OrderSummary";
 import CheckoutForms from "../../forms/CheckoutForms";
-import { useNavigate } from "react-router-dom";
 import {
   clearCart,
   updateQuantityAfterOrder,
@@ -13,7 +13,6 @@ const Checkout = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
 
-  // Form state & errors moved here
   const initialFormValues = {
     firstName: "",
     lastName: "",
@@ -33,7 +32,6 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Calculate total items and price on cartItems change
   useEffect(() => {
     let count = 0;
     let price = 0;
@@ -45,7 +43,6 @@ const Checkout = () => {
     setTotalItems(count);
   }, [cartItems]);
 
-  // Validation function moved here
   const validateForm = (inputs) => {
     const errors = {};
     if (!inputs.firstName) errors.firstName = "First name is required";
@@ -64,13 +61,11 @@ const Checkout = () => {
     return errors;
   };
 
-  // Handle input change for controlled inputs
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormInputs((prev) => ({ ...prev, [name]: value }));
   };
 
-  // On form submit from CheckoutForms
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
@@ -82,7 +77,6 @@ const Checkout = () => {
       return;
     }
 
-    // Form is valid, proceed with order processing
     cartItems.forEach((item) => {
       dispatch(
         updateQuantityAfterOrder({
@@ -93,7 +87,7 @@ const Checkout = () => {
     });
 
     dispatch(clearCart());
-    const fakeOrderId = Math.floor(Math.random() * 900000 + 100000); // e.g. 6-digit order ID
+    const fakeOrderId = Math.floor(Math.random() * 900000 + 100000);
     const salesTax = totalPrice * 0.05;
     const totalWithTax = totalPrice + salesTax;
 
@@ -106,7 +100,6 @@ const Checkout = () => {
     });
   };
 
-  // Update form validity on inputs or errors change
   useEffect(() => {
     const noErrors = Object.keys(formErrors).length === 0;
     const noEmptyInputs = !Object.values(formInputs).some(
@@ -116,35 +109,73 @@ const Checkout = () => {
   }, [formErrors, formInputs]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 min-h-[calc(100vh-153px)] text-gray-900 text-base md:text-lg">
-      <div>
-        <h1 className="text-4xl font-bold mb-4">Checkout</h1>
-      </div>
+    <div className="w-full min-w-full py-8 md:py-10 mb-16 min-h-[calc(100vh-180px)] overflow-visible">
+      <div className="site-container overflow-visible">
+        <header className="mb-8 md:mb-10">
+          <p className="text-xs font-semibold text-teal-600 uppercase tracking-wider mb-2">
+            Checkout
+          </p>
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+              Complete your order
+            </h1>
+            <p className="text-slate-500 mt-1">
+              {totalItems} {totalItems === 1 ? "item" : "items"} in your cart
+            </p>
+            {cartItems.length > 0 && (
+              <Link
+                to="/cart"
+                className="inline-block mt-3 text-sm font-medium text-teal-600 hover:text-teal-700 transition-colors cursor-pointer"
+              >
+                ← Back to cart
+              </Link>
+            )}
+          </div>
+        </header>
 
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="w-full max-w-md mx-auto md:mx-0 md:flex-grow">
-          {cartItems.length > 0 ? (
-            <CheckoutForms
-              formInputs={formInputs}
-              formErrors={formErrors}
-              onInputChange={handleInputChange}
-              onSubmit={handleFormSubmit}
-              formValid={formValid}
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 overflow-visible">
+          <div className="w-full lg:flex-grow min-w-0">
+            {cartItems.length > 0 ? (
+              <CheckoutForms
+                formInputs={formInputs}
+                formErrors={formErrors}
+                onInputChange={handleInputChange}
+                onSubmit={handleFormSubmit}
+                formValid={formValid}
+              />
+            ) : (
+              <div className="bg-white rounded-2xl border border-slate-200 p-12 md:p-16 text-center shadow-soft">
+                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-teal-50 to-slate-100 flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-10 h-10 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <h2 className="text-xl md:text-2xl font-semibold text-slate-900 mb-2">
+                  Your cart is empty
+                </h2>
+                <p className="text-slate-500 mb-8 max-w-sm mx-auto leading-relaxed">
+                  Add items to your cart to checkout. We ship fast and returns are easy.
+                </p>
+                <Link
+                  to="/products"
+                  className="inline-flex items-center gap-2 bg-slate-900 text-white font-semibold rounded-xl px-6 py-3.5 hover:bg-slate-800 transition-all active:scale-[0.98] cursor-pointer shadow-soft"
+                >
+                  Browse Products
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+            )}
+          </div>
+
+          <aside className="w-full lg:w-[360px] shrink-0 lg:sticky lg:top-24 lg:self-start">
+            <OrderSummary
+              totalItems={totalItems}
+              totalPrice={totalPrice}
+              checkout={true}
             />
-          ) : (
-            <h2 className="text-2xl font-semibold text-center md:text-left">
-              You have no items in your cart
-            </h2>
-          )}
-        </div>
-
-        <div className="w-full max-w-md mx-auto md:mx-0 md:w-[350px]">
-          <OrderSummary
-            totalItems={totalItems}
-            totalPrice={totalPrice}
-            checkout={true}
-            formValid={formValid}
-          />
+          </aside>
         </div>
       </div>
     </div>

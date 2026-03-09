@@ -49,11 +49,11 @@ const AdminProductOverlay = ({ handleOverlay, product }) => {
       <div className="bg-white rounded-lg shadow-lg max-w-3xl w-full p-8 relative overflow-auto max-h-[90vh]">
         <h2 className="text-2xl font-bold mb-6">
           Edit{" "}
-          <em className="font-semibold text-indigo-700">{product.serialNum}</em>
+          <em className="font-semibold text-accent-600">{product.serialNum}</em>
         </h2>
         <button
           onClick={handleOverlay}
-          className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
+          className="absolute top-4 right-4 text-slate-600 hover:text-slate-900 cursor-pointer"
           aria-label="Close edit overlay"
         >
           <i className="fa-solid fa-x text-2xl"></i>
@@ -67,7 +67,7 @@ const AdminProductOverlay = ({ handleOverlay, product }) => {
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
           <div className="flex flex-col">
-            <label htmlFor="title" className="mb-1 font-semibold text-gray-700">
+            <label htmlFor="title" className="mb-1 font-semibold text-slate-700">
               Title
             </label>
             <textarea
@@ -75,7 +75,7 @@ const AdminProductOverlay = ({ handleOverlay, product }) => {
               name="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-slate-200 rounded-md p-2 resize-none focus:outline-none focus:ring-2 focus:ring-accent-500"
               rows={3}
               required
             />
@@ -84,7 +84,7 @@ const AdminProductOverlay = ({ handleOverlay, product }) => {
           <div className="flex flex-col">
             <label
               htmlFor="description"
-              className="mb-1 font-semibold text-gray-700"
+              className="mb-1 font-semibold text-slate-700"
             >
               Description
             </label>
@@ -93,7 +93,7 @@ const AdminProductOverlay = ({ handleOverlay, product }) => {
               name="description"
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-slate-200 rounded-md p-2 resize-none focus:outline-none focus:ring-2 focus:ring-accent-500"
               rows={3}
               required
             />
@@ -102,7 +102,7 @@ const AdminProductOverlay = ({ handleOverlay, product }) => {
           <div className="flex flex-col">
             <label
               htmlFor="category"
-              className="mb-1 font-semibold text-gray-700"
+              className="mb-1 font-semibold text-slate-700"
             >
               Category
             </label>
@@ -112,13 +112,13 @@ const AdminProductOverlay = ({ handleOverlay, product }) => {
               name="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-slate-200 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-accent-500"
               required
             />
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="price" className="mb-1 font-semibold text-gray-700">
+            <label htmlFor="price" className="mb-1 font-semibold text-slate-700">
               Price
             </label>
             <input
@@ -127,7 +127,7 @@ const AdminProductOverlay = ({ handleOverlay, product }) => {
               name="price"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-slate-200 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-accent-500"
               min="0"
               step="0.01"
               required
@@ -137,7 +137,7 @@ const AdminProductOverlay = ({ handleOverlay, product }) => {
           <div className="flex flex-col">
             <label
               htmlFor="quantity"
-              className="mb-1 font-semibold text-gray-700"
+              className="mb-1 font-semibold text-slate-700"
             >
               Quantity in stock
             </label>
@@ -147,14 +147,14 @@ const AdminProductOverlay = ({ handleOverlay, product }) => {
               name="quantity"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-slate-200 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-accent-500"
               min="0"
               required
             />
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="image" className="mb-1 font-semibold text-gray-700">
+            <label htmlFor="image" className="mb-1 font-semibold text-slate-700">
               Image URL
             </label>
             <input
@@ -163,12 +163,12 @@ const AdminProductOverlay = ({ handleOverlay, product }) => {
               name="image"
               value={image}
               onChange={(e) => setImage(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-slate-200 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-accent-500"
               required
             />
           </div>
 
-          <div className="flex justify-center items-center p-2 border border-gray-300 rounded-md">
+          <div className="flex justify-center items-center p-2 border border-slate-200 rounded-md">
             <img
               src={image}
               alt={title}
@@ -180,7 +180,7 @@ const AdminProductOverlay = ({ handleOverlay, product }) => {
           <div className="md:col-span-2 flex justify-end space-x-4 mt-4">
             <button
               type="submit"
-              className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition"
+              className="bg-teal-600 text-white px-6 py-2 rounded-xl hover:bg-teal-700 transition cursor-pointer"
             >
               Update Item
             </button>

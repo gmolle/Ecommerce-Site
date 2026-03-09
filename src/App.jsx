@@ -15,11 +15,12 @@ import OrderSuccessPage from "./common/pages/ordersuccess/OrderSuccess";
 
 function App() {
   return (
-    <div className="app">
-      <BrowserRouter basename="/ecommerce-site">
+    <div className="app min-h-screen flex flex-col bg-slate-50">
+      <BrowserRouter basename="/Ecommerce-Site">
         <ScrollToTop />
         <Navbar />
-        <Routes>
+        <div className="flex-1 w-full min-w-full flex flex-col">
+          <Routes>
           <Route path="/" exact element={<LandingPage />} />
           <Route path="/products" exact element={<ProductsPage />} />
           <Route path="/product/:id" exact element={<ProductDetailsPage />} />
@@ -27,7 +28,8 @@ function App() {
           <Route path="/checkout" exact element={<Checkout />} />
           <Route path="/admin" exact element={<Admin />} />
           <Route path="/order-success" exact element={<OrderSuccessPage />} />
-        </Routes>
+          </Routes>
+        </div>
         <Footer />
         {/* <Link to="/admin">Admin</Link> */}
       </BrowserRouter>

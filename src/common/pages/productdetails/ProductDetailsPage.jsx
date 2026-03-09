@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../../features/products/productSlice";
 import Product from "../../../features/products/Product";
@@ -33,7 +33,7 @@ const ProductDetailsPage = () => {
     return products.filter(
       (p) =>
         p.category === currentProduct.category &&
-        p.serialNumber !== currentProduct.serialNum
+        p.serialNum !== currentProduct.serialNum
     );
   }, [products, currentProduct]);
 
@@ -46,53 +46,114 @@ const ProductDetailsPage = () => {
   }, []);
 
   if (!ready || loading) {
-    console.log("loading...");
     return <Loader />;
   }
 
   if (!currentProduct) {
     return (
-      <div className="text-center p-8">
-        <h2 className="text-2xl font-semibold">Product not found</h2>
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-24 text-center">
+        <h2 className="text-2xl font-semibold text-slate-900">Product not found</h2>
+        <p className="text-slate-500 mt-2 mb-8">The product you're looking for doesn't exist.</p>
+        <Link
+          to="/products"
+          className="inline-flex items-center gap-2 text-teal-600 font-medium hover:text-teal-700 cursor-pointer"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to products
+        </Link>
       </div>
     );
   }
 
+  const categoryName =
+    currentProduct.category.charAt(0).toUpperCase() + currentProduct.category.slice(1);
+
   return (
-    <div className="max-w-7xl mx-auto p-4 pb-0 min-h-screen mb-10">
+    <div className="max-w-7xl mx-auto px-4 md:px-6 pb-16">
       <ToastContainer position="top-left" autoClose={4000} transition={Slide} />
 
-      {!loading ? (
-        <div className="mb-12">
+      {/* Breadcrumb */}
+      <nav className="py-6 text-sm">
+        <ol className="flex flex-wrap items-center gap-2 text-slate-500">
+          <li>
+            <Link to="/" className="hover:text-slate-900 transition-colors cursor-pointer">
+              Home
+            </Link>
+          </li>
+          <li>/</li>
+          <li>
+            <Link to="/products" className="hover:text-slate-900 transition-colors cursor-pointer">
+              Products
+            </Link>
+          </li>
+          <li>/</li>
+          <li>
+            <Link
+              to={`/products?category=${encodeURIComponent(currentProduct.category)}`}
+              className="hover:text-slate-900 transition-colors cursor-pointer"
+            >
+              {categoryName}
+            </Link>
+          </li>
+          <li>/</li>
+          <li className="text-slate-900 font-medium truncate max-w-[200px] sm:max-w-none">
+            {currentProduct.title}
+          </li>
+        </ol>
+      </nav>
+
+      {/* Main product */}
+      {!loading && (
+        <div className="mb-20">
           <Product
             product={currentProduct}
             details={true}
             notify={addedSuccess}
           />
         </div>
-      ) : (
-        <Loader />
       )}
 
-      {/* Main Product */}
-
-      {/* Related Products Header */}
-      <h2 className="text-2xl font-semibold mb-6">
-        Items related to{" "}
-        {currentProduct.category.charAt(0).toUpperCase() +
-          currentProduct.category.slice(1)}
-      </h2>
-
-      {/* Related Products Grid */}
-      {relatedProducts.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {relatedProducts.map((product) => (
-            <Product key={product.id} product={product} notify={addedSuccess} />
-          ))}
+      {/* Related products */}
+      <section className="border-t border-slate-200 pt-16">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+          <div>
+            <h2 className="text-2xl font-bold text-slate-900">
+              You might also like
+            </h2>
+            <p className="text-slate-500 mt-1">
+              More from {categoryName}
+            </p>
+          </div>
+          {relatedProducts.length > 0 && (
+            <Link
+              to={`/products?category=${encodeURIComponent(currentProduct.category)}`}
+              className="text-sm font-medium text-teal-600 hover:text-teal-700 cursor-pointer shrink-0"
+            >
+              View all {categoryName} →
+            </Link>
+          )}
         </div>
-      ) : (
-        <h2>No related products</h2>
-      )}
+
+        {relatedProducts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {relatedProducts.slice(0, 4).map((product) => (
+              <Product key={product.id} product={product} notify={addedSuccess} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12 bg-slate-50 rounded-2xl">
+            <p className="text-slate-500">No related products at the moment.</p>
+            <Link
+              to="/products"
+              className="inline-block mt-4 text-teal-600 font-medium hover:text-teal-700 cursor-pointer"
+            >
+              Browse all products
+            </Link>
+          </div>
+        )}
+      </section>
     </div>
   );
 };

@@ -55,7 +55,7 @@ const AdminProduct = ({ handleOverlay }) => {
         <h2 className="text-2xl font-bold mb-6">Add New Product</h2>
         <button
           onClick={handleOverlay}
-          className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
+          className="absolute top-4 right-4 text-slate-600 hover:text-slate-900 cursor-pointer"
           aria-label="Close add product overlay"
         >
           <i className="fa-solid fa-x text-2xl"></i>
@@ -71,7 +71,7 @@ const AdminProduct = ({ handleOverlay }) => {
           <div className="flex flex-col">
             <label
               htmlFor="serial"
-              className="mb-1 font-semibold text-gray-700"
+              className="mb-1 font-semibold text-slate-700"
             >
               Serial Number
             </label>
@@ -81,13 +81,13 @@ const AdminProduct = ({ handleOverlay }) => {
               name="serial"
               value={serial}
               onChange={(e) => setSerial(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-slate-200 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-accent-500"
               required
             />
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="title" className="mb-1 font-semibold text-gray-700">
+            <label htmlFor="title" className="mb-1 font-semibold text-slate-700">
               Title
             </label>
             <textarea
@@ -95,7 +95,7 @@ const AdminProduct = ({ handleOverlay }) => {
               name="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-slate-200 rounded-md p-2 resize-none focus:outline-none focus:ring-2 focus:ring-accent-500"
               rows={3}
               required
             />
@@ -104,7 +104,7 @@ const AdminProduct = ({ handleOverlay }) => {
           <div className="flex flex-col">
             <label
               htmlFor="description"
-              className="mb-1 font-semibold text-gray-700"
+              className="mb-1 font-semibold text-slate-700"
             >
               Description
             </label>
@@ -113,7 +113,7 @@ const AdminProduct = ({ handleOverlay }) => {
               name="description"
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-slate-200 rounded-md p-2 resize-none focus:outline-none focus:ring-2 focus:ring-accent-500"
               rows={3}
               required
             />
@@ -122,7 +122,7 @@ const AdminProduct = ({ handleOverlay }) => {
           <div className="flex flex-col">
             <label
               htmlFor="category"
-              className="mb-1 font-semibold text-gray-700"
+              className="mb-1 font-semibold text-slate-700"
             >
               Category
             </label>
@@ -132,13 +132,13 @@ const AdminProduct = ({ handleOverlay }) => {
               name="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-slate-200 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-accent-500"
               required
             />
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="price" className="mb-1 font-semibold text-gray-700">
+            <label htmlFor="price" className="mb-1 font-semibold text-slate-700">
               Price
             </label>
             <input
@@ -147,7 +147,7 @@ const AdminProduct = ({ handleOverlay }) => {
               name="price"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-slate-200 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-accent-500"
               min="0"
               step="0.01"
               required
@@ -157,7 +157,7 @@ const AdminProduct = ({ handleOverlay }) => {
           <div className="flex flex-col">
             <label
               htmlFor="quantity"
-              className="mb-1 font-semibold text-gray-700"
+              className="mb-1 font-semibold text-slate-700"
             >
               Quantity in stock
             </label>
@@ -167,14 +167,14 @@ const AdminProduct = ({ handleOverlay }) => {
               name="quantity"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-slate-200 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-accent-500"
               min="0"
               required
             />
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="image" className="mb-1 font-semibold text-gray-700">
+            <label htmlFor="image" className="mb-1 font-semibold text-slate-700">
               Image URL
             </label>
             <input
@@ -183,12 +183,12 @@ const AdminProduct = ({ handleOverlay }) => {
               name="image"
               value={image}
               onChange={(e) => setImage(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-slate-200 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-accent-500"
               required
             />
           </div>
 
-          <div className="flex justify-center items-center p-2 border border-gray-300 rounded-md">
+          <div className="flex justify-center items-center p-2 border border-slate-200 rounded-md">
             <img
               src={image}
               alt={title}
@@ -200,7 +200,7 @@ const AdminProduct = ({ handleOverlay }) => {
           <div className="md:col-span-2 flex justify-end space-x-4 mt-4">
             <button
               type="submit"
-              className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition"
+              className="bg-teal-600 text-white px-6 py-2 rounded-xl hover:bg-teal-700 transition cursor-pointer"
             >
               Add Item
             </button>

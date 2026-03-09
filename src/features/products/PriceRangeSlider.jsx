@@ -8,7 +8,7 @@ const MAX = 1000;
 const PriceRangeSlider = ({ priceFilter, setPriceFilter }) => {
   return (
     <div className="w-full max-w-xs select-none">
-      <div className="flex justify-between mb-1 text-sm font-medium text-gray-700">
+      <div className="flex justify-between mb-2 text-sm font-medium text-slate-600">
         <span>${priceFilter[0]}</span>
         <span>${priceFilter[1]}</span>
       </div>
@@ -25,11 +25,11 @@ const PriceRangeSlider = ({ priceFilter, setPriceFilter }) => {
             <div
               key={key}
               {...rest}
-              className="relative h-2 w-full rounded bg-gray-300"
+              className="relative h-2.5 w-full rounded-full bg-slate-200"
               style={{
                 background: getTrackBackground({
                   values: priceFilter,
-                  colors: ["#d1d5db", "#6366f1", "#d1d5db"],
+                  colors: ["#e2e8f0", "#0f766e", "#e2e8f0"],
                   min: MIN,
                   max: MAX,
                 }),
@@ -45,7 +45,7 @@ const PriceRangeSlider = ({ priceFilter, setPriceFilter }) => {
             <div
               key={key}
               {...rest}
-              className="h-5 w-5 rounded-full bg-indigo-600 border-2 border-white shadow cursor-pointer"
+              className="h-5 w-5 rounded-full bg-teal-600 border-2 border-white shadow-md cursor-pointer hover:bg-teal-700 transition-colors"
             />
           );
         }}

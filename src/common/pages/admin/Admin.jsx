@@ -52,20 +52,20 @@ const Admin = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="min-h-[calc(100vh-180px)] flex items-center justify-center bg-slate-50 p-4">
         <form
           onSubmit={handleLoginSubmit}
-          className="bg-white p-8 shadow-md rounded w-96"
+          className="bg-white p-8 shadow-soft rounded-2xl w-full max-w-md ring-1 ring-slate-100"
         >
-          <h2 className="text-xl font-bold mb-4">Admin Login</h2>
-          {error && <p className="text-red-500 mb-2">{error}</p>}
+          <h2 className="text-xl font-bold text-slate-900 mb-6">Admin Login</h2>
+          {error && <p className="text-red-500 mb-4 text-sm">{error}</p>}
           <input
             type="text"
             name="username"
             placeholder="Username"
             value={loginForm.username}
             onChange={handleLoginChange}
-            className="w-full mb-4 p-2 border rounded"
+            className="w-full mb-4 p-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500"
           />
           <input
             type="password"
@@ -73,11 +73,11 @@ const Admin = () => {
             placeholder="Password"
             value={loginForm.password}
             onChange={handleLoginChange}
-            className="w-full mb-4 p-2 border rounded"
+            className="w-full mb-6 p-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500"
           />
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white p-2 rounded hover:bg-indigo-700"
+            className="w-full bg-teal-600 text-white p-3 rounded-xl font-semibold hover:bg-teal-700 transition-colors cursor-pointer"
           >
             Login
           </button>
@@ -87,21 +87,21 @@ const Admin = () => {
   }
 
   return (
-    <div className="min-h-screen p-10 bg-gray-100 ">
+    <div className="min-h-[calc(100vh-180px)] p-6 md:p-10 bg-slate-50">
       <div className="mx-auto max-w-7xl px-4">
-        <h1 className="text-3xl font-bold mb-6">Admin Panel</h1>
+        <h1 className="text-3xl font-bold text-slate-900 mb-2">Admin Panel</h1>
+        <p className="text-slate-500 mb-8">Manage your products</p>
 
-        <div className="flex flex-col justify-between md:flex-row">
+        <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <input
             type="text"
             placeholder="Search products..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="mb-6 p-2 w-full max-w-md border border-gray-300 rounded"
+            className="flex-1 max-w-md p-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500"
           />
-
           <button
-            className="mb-6 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+            className="px-6 py-3 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition-colors cursor-pointer"
             onClick={handleAddClick}
           >
             Add Item
@@ -112,26 +112,28 @@ const Admin = () => {
           {filteredProducts.map((product) => (
             <div
               key={product.serialNum}
-              className="p-4 border rounded shadow bg-white flex flex-col"
+              className="p-5 border border-slate-200 rounded-2xl shadow-soft bg-white flex flex-col"
             >
-              <img
-                src={product.image}
-                alt={product.title}
-                className="h-40 object-contain mb-4"
-              />
-              <h2 className="font-bold">{product.title}</h2>
-              <p>${product.price}</p>
-              <p>Serial: {product.serialNum}</p>
-              <div className="mt-auto flex justify-between space-x-2">
+              <div className="h-40 bg-slate-50 rounded-xl flex items-center justify-center mb-4 overflow-hidden">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="h-full object-contain"
+                />
+              </div>
+              <h2 className="font-semibold text-slate-900 line-clamp-2">{product.title}</h2>
+              <p className="text-teal-600 font-bold mt-1">${product.price}</p>
+              <p className="text-slate-500 text-sm">Serial: {product.serialNum}</p>
+              <div className="mt-auto flex gap-2 pt-4">
                 <button
                   onClick={() => handleEditClick(product)}
-                  className="px-2 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
+                  className="flex-1 px-3 py-2 text-sm bg-teal-600 text-white rounded-xl font-medium hover:bg-teal-700 transition-colors cursor-pointer"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleRemoveClick(product.serialNum)}
-                  className="px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600"
+                  className="flex-1 px-3 py-2 text-sm bg-red-500 text-white rounded-xl font-medium hover:bg-red-600 transition-colors cursor-pointer"
                 >
                   Remove
                 </button>
