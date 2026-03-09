@@ -47,7 +47,7 @@ const Admin = () => {
 
   // Filter products by search term (case-insensitive)
   const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    product.title.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   if (!isAuthenticated) {
@@ -121,9 +121,13 @@ const Admin = () => {
                   className="h-full object-contain"
                 />
               </div>
-              <h2 className="font-semibold text-slate-900 line-clamp-2">{product.title}</h2>
+              <h2 className="font-semibold text-slate-900 line-clamp-2">
+                {product.title}
+              </h2>
               <p className="text-teal-600 font-bold mt-1">${product.price}</p>
-              <p className="text-slate-500 text-sm">Serial: {product.serialNum}</p>
+              <p className="text-slate-500 text-sm">
+                Serial: {product.serialNum}
+              </p>
               <div className="mt-auto flex gap-2 pt-4">
                 <button
                   onClick={() => handleEditClick(product)}
@@ -133,7 +137,7 @@ const Admin = () => {
                 </button>
                 <button
                   onClick={() => handleRemoveClick(product.serialNum)}
-                  className="flex-1 px-3 py-2 text-sm bg-red-500 text-white rounded-xl font-medium hover:bg-red-600 transition-colors cursor-pointer"
+                  className="flex-1 px-3 py-2 text-sm bg-red-400 text-white rounded-xl font-medium hover:bg-red-500 transition-colors cursor-pointer"
                 >
                   Remove
                 </button>

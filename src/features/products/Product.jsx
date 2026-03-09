@@ -26,17 +26,16 @@ const Product = ({ product, details, notify }) => {
       : [<option key="0">Out Of Stock</option>];
   };
 
-  // 🔍 Product Detail View - Modern layout
   if (details) {
     const categoryName = product.category
       ? product.category.charAt(0).toUpperCase() + product.category.slice(1)
       : "";
 
     return (
-      <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
-        {/* Image - constrained size */}
-        <div className="flex-1 min-w-0">
-          <div className="aspect-square lg:aspect-[4/5] max-w-lg lg:max-w-xl bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-soft flex items-center justify-center p-6 md:p-10">
+      <div className="flex flex-col lg:flex-row gap-14 lg:gap-20">
+        {/* Image - fixed size, no grow */}
+        <div className="shrink-0 min-w-0 flex justify-center lg:justify-start">
+          <div className="aspect-square lg:aspect-[4/5] max-w-md lg:max-w-lg bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-soft flex items-center justify-center p-5 md:p-8">
             <img
               src={image}
               alt={title}
@@ -45,8 +44,8 @@ const Product = ({ product, details, notify }) => {
           </div>
         </div>
 
-        {/* Content - sticky on desktop */}
-        <div className="lg:w-[420px] lg:flex-shrink-0">
+        {/* Content - takes remaining space, sticky on desktop */}
+        <div className="flex-1 min-w-0">
           <div className="lg:sticky lg:top-24 space-y-6">
             {/* Category badge */}
             {categoryName && (
@@ -89,7 +88,10 @@ const Product = ({ product, details, notify }) => {
             <div className="pt-4 border-t border-slate-200">
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex items-center gap-3">
-                  <label htmlFor="qty-detail" className="text-sm font-medium text-slate-700">
+                  <label
+                    htmlFor="qty-detail"
+                    className="text-sm font-medium text-slate-700"
+                  >
                     Quantity
                   </label>
                   <select
@@ -118,14 +120,34 @@ const Product = ({ product, details, notify }) => {
             {/* Trust hints */}
             <div className="flex flex-wrap gap-6 pt-4 text-sm text-slate-500">
               <span className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                <svg
+                  className="w-4 h-4 text-slate-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+                  />
                 </svg>
                 Free shipping on $50+
               </span>
               <span className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                <svg
+                  className="w-4 h-4 text-slate-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
                 </svg>
                 Easy returns
               </span>
@@ -138,11 +160,13 @@ const Product = ({ product, details, notify }) => {
     );
   }
 
-  // 🧱 Grid Card View - Modern ecommerce style
   return (
     <div className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 hover:border-slate-300 hover:shadow-xl transition-all duration-300 flex flex-col h-full">
       {/* Image - square aspect, image-first */}
-      <Link to={`/product/${serialNum}`} className="block relative aspect-square bg-slate-50 overflow-hidden cursor-pointer shrink-0">
+      <Link
+        to={`/product/${serialNum}`}
+        className="block relative aspect-square bg-slate-50 overflow-hidden cursor-pointer shrink-0"
+      >
         <img
           src={image}
           alt={title}
@@ -157,7 +181,9 @@ const Product = ({ product, details, notify }) => {
             {title}
           </h3>
         </Link>
-        <p className="text-lg font-bold text-slate-900 mb-4">${price.toFixed(2)}</p>
+        <p className="text-lg font-bold text-slate-900 mb-4">
+          ${price.toFixed(2)}
+        </p>
 
         <div className="flex gap-2 mt-auto">
           <select
