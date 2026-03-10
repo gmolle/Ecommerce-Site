@@ -45,7 +45,6 @@ const Admin = () => {
     dispatch(deleteItem(serialNum));
   };
 
-  // Filter products by search term (case-insensitive)
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase()),
   );

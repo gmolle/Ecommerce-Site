@@ -78,10 +78,7 @@ const AdminAddProduct = ({ handleOverlay }) => {
           <i className="fa-solid fa-x"></i>
         </span>
 
-        {/* FORM FIELDS */}
         <div className="admin-product-info">
-          {/* Serial, Title, etc... */}
-          {/* IMAGE PREVIEW */}
           <div className="image-wrapper">
             <label>Image</label>
             <input
@@ -113,7 +110,6 @@ const AdminAddProduct = ({ handleOverlay }) => {
   );
 };
 
-// Minimal inline styles for modal (you can move these to your CSS)
 const overlayStyles = {
   position: "fixed",
   top: 0,

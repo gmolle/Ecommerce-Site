@@ -14,10 +14,8 @@ const Navbar = () => {
   const { cartItems, productsSearch } = useSelector((state) => state.products);
   const navigate = useNavigate();
 
-  // Local state for search input
   const [localSearch, setLocalSearch] = useState("");
 
-  // Update localSearch if productsSearch changes (optional sync)
   useEffect(() => {
     setLocalSearch(productsSearch || "");
   }, [productsSearch]);
@@ -34,21 +32,18 @@ const Navbar = () => {
     setupData();
   }, [dispatch]);
 
-  // Called on Enter key press
   const handleSearchSubmit = () => {
     const trimmed = localSearch.trim();
 
     if (pathname === "/products") {
       dispatch(setProductSearch(trimmed));
-      // Update URL search param accordingly
       if (trimmed) {
         navigate(`/products?search=${encodeURIComponent(trimmed)}`);
       } else {
-        navigate("/products");
-      }
-    } else {
-      // On other pages, navigate to products page with search
-      if (trimmed) {
+      navigate("/products");
+    }
+  } else {
+    if (trimmed) {
         navigate(`/products?search=${encodeURIComponent(trimmed)}`);
       } else {
         navigate("/products");
@@ -70,7 +65,6 @@ const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
       <nav className="site-container h-16 flex items-center justify-between gap-4">
-        {/* Left - Brand + Nav */}
         <div className="flex items-center gap-10">
           <NavLink to="/" className="font-bold text-xl text-slate-900 hover:text-slate-700 transition-colors cursor-pointer">
             Store
@@ -99,7 +93,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Right side - Search, Cart */}
         <div className="flex items-center gap-4 md:gap-6">
           {pathname !== "/products" && pathname !== "/admin" && (
             <input

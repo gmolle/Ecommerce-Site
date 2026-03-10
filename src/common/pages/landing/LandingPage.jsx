@@ -75,11 +75,9 @@ const categoryImages = {
 const LandingPage = () => {
   const dispatch = useDispatch();
 
-  // Grab categories from Redux store
   const categories = useSelector((state) => state.products.categories);
 
   useEffect(() => {
-    // Fetch categories on mount if not already loaded
     if (!categories || categories.length === 0) {
       dispatch(fetchCategories());
     }
@@ -87,7 +85,6 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Hero - Full bleed, impactful */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=2070&auto=format&fit=crop"
@@ -117,7 +114,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Trust bar */}
       <section className="bg-slate-900 text-white py-4 border-y border-slate-700/50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 text-sm">
@@ -137,7 +133,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Categories - Image overlay cards */}
       <section className="bg-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Shop by category</h2>
@@ -174,7 +169,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Benefits - Compact horizontal */}
       <section className="py-16 md:py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">

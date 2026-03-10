@@ -31,7 +31,6 @@ function App() {
           </Routes>
         </div>
         <Footer />
-        {/* <Link to="/admin">Admin</Link> */}
       </BrowserRouter>
     </div>
   );

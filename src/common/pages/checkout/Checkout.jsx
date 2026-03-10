@@ -51,18 +51,77 @@ const Checkout = () => {
     if (!inputs.city) errors.city = "City is required";
     if (!inputs.state) errors.state = "State is required";
     if (!inputs.zip) errors.zip = "ZIP is required";
-    if (!inputs.cardNumber) errors.cardNumber = "Card number is required";
-    if (!inputs.expDate) errors.expDate = "Exp. date is required";
+
+    const rawCard = (inputs.cardNumber || "").replace(/\s/g, "");
+    if (!rawCard) {
+      errors.cardNumber = "Card number is required";
+    } else if (!/^\d+$/.test(rawCard)) {
+      errors.cardNumber = "Card number must contain only digits";
+    } else if (rawCard.length < 13 || rawCard.length > 19) {
+      errors.cardNumber = "Card number must be 13–19 digits";
+    }
+
+    const rawExp = (inputs.expDate || "").replace(/\D/g, "");
+    if (!rawExp) {
+      errors.expDate = "Exp. date is required";
+    } else if (rawExp.length !== 4) {
+      errors.expDate = "Enter MM/YY (e.g. 12/28)";
+    } else {
+      const month = parseInt(rawExp.slice(0, 2), 10);
+      const year = 2000 + parseInt(rawExp.slice(2, 4), 10);
+      if (month < 1 || month > 12) {
+        errors.expDate = "Invalid month (01–12)";
+      } else {
+        const now = new Date();
+        const exp = new Date(year, month, 0);
+        if (exp < now) {
+          errors.expDate = "Card has expired";
+        }
+      }
+    }
+
     if (!inputs.cvv) {
       errors.cvv = "CVV is required";
+    } else if (!/^\d+$/.test(inputs.cvv)) {
+      errors.cvv = "CVV must be 3 or 4 digits";
     } else if (inputs.cvv.length < 3 || inputs.cvv.length > 4) {
-      errors.cvv = "CVV must be between 3 and 4 digits";
+      errors.cvv = "CVV must be 3 or 4 digits";
     }
     return errors;
   };
 
+  const formatCardNumber = (value) => {
+    const digits = value.replace(/\D/g, "").slice(0, 19);
+    return digits.replace(/(\d{4})(?=\d)/g, "$1 ").trim();
+  };
+
+  const formatExpDate = (value, previousValue) => {
+    const digits = value.replace(/\D/g, "").slice(0, 4);
+    if (digits.length === 0) return "";
+    if (digits.length === 1) return digits;
+    if (digits.length === 2) {
+      const prevDigits = (previousValue || "").replace(/\D/g, "");
+      if (prevDigits.length > 2) return digits;
+      return `${digits}/`;
+    }
+    return `${digits.slice(0, 2)}/${digits.slice(2)}`;
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    if (name === "cardNumber") {
+      setFormInputs((prev) => ({ ...prev, [name]: formatCardNumber(value) }));
+      return;
+    }
+    if (name === "expDate") {
+      setFormInputs((prev) => ({ ...prev, [name]: formatExpDate(value, prev.expDate) }));
+      return;
+    }
+    if (name === "cvv") {
+      const digits = value.replace(/\D/g, "").slice(0, 4);
+      setFormInputs((prev) => ({ ...prev, [name]: digits }));
+      return;
+    }
     setFormInputs((prev) => ({ ...prev, [name]: value }));
   };
 

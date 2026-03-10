@@ -21,7 +21,6 @@ const CheckoutForms = ({
   return (
     <div className="w-full rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-soft-lg">
       <form id="checkout-form" onSubmit={onSubmit} noValidate>
-        {/* Shipping */}
         <div className="mb-8">
           <h2 className="text-sm font-semibold text-teal-600 uppercase tracking-wider mb-4 flex items-center gap-2">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -148,7 +147,6 @@ const CheckoutForms = ({
           </div>
         </div>
 
-        {/* Payment */}
         <div className="pt-8 border-t border-slate-200">
           <h2 className="text-sm font-semibold text-teal-600 uppercase tracking-wider mb-4 flex items-center gap-2">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -163,12 +161,14 @@ const CheckoutForms = ({
                 type="text"
                 id="cardNumber"
                 name="cardNumber"
-                placeholder="Card Number"
+                placeholder="1234 5678 9012 3456"
                 value={formInputs.cardNumber}
                 onChange={onInputChange}
                 className={`${inputBaseClasses} peer ${formErrors.cardNumber ? inputErrorClasses : ""}`}
                 autoComplete="cc-number"
-                maxLength={19}
+                inputMode="numeric"
+                autoCorrect="off"
+                maxLength={23}
               />
               <label htmlFor="cardNumber" className={`${labelBaseClasses} ${labelFocusedClasses}`}>
                 Card number
@@ -188,6 +188,8 @@ const CheckoutForms = ({
                 onChange={onInputChange}
                 className={`${inputBaseClasses} peer ${formErrors.expDate ? inputErrorClasses : ""}`}
                 autoComplete="cc-exp"
+                inputMode="numeric"
+                autoCorrect="off"
                 maxLength={5}
               />
               <label htmlFor="expDate" className={`${labelBaseClasses} ${labelFocusedClasses}`}>
@@ -208,6 +210,8 @@ const CheckoutForms = ({
                 onChange={onInputChange}
                 className={`${inputBaseClasses} peer ${formErrors.cvv ? inputErrorClasses : ""}`}
                 autoComplete="cc-csc"
+                inputMode="numeric"
+                autoCorrect="off"
                 maxLength={4}
               />
               <label htmlFor="cvv" className={`${labelBaseClasses} ${labelFocusedClasses}`}>

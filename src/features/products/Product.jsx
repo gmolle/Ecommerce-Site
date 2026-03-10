@@ -33,7 +33,6 @@ const Product = ({ product, details, notify }) => {
 
     return (
       <div className="flex flex-col lg:flex-row gap-14 lg:gap-20">
-        {/* Image - fixed size, no grow */}
         <div className="shrink-0 min-w-0 flex justify-center lg:justify-start">
           <div className="aspect-square lg:aspect-[4/5] max-w-md lg:max-w-lg bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-soft flex items-center justify-center p-5 md:p-8">
             <img
@@ -44,10 +43,8 @@ const Product = ({ product, details, notify }) => {
           </div>
         </div>
 
-        {/* Content - takes remaining space, sticky on desktop */}
         <div className="flex-1 min-w-0">
           <div className="lg:sticky lg:top-24 space-y-6">
-            {/* Category badge */}
             {categoryName && (
               <Link
                 to={`/products?category=${encodeURIComponent(product.category)}`}
@@ -65,7 +62,6 @@ const Product = ({ product, details, notify }) => {
               ${price?.toFixed(2)}
             </p>
 
-            {/* Stock status */}
             <div className="flex items-center gap-2">
               {quantity > 0 ? (
                 <span className="inline-flex items-center gap-1.5 text-sm text-teal-700">
@@ -84,7 +80,6 @@ const Product = ({ product, details, notify }) => {
               {description}
             </p>
 
-            {/* Add to cart */}
             <div className="pt-4 border-t border-slate-200">
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex items-center gap-3">
@@ -117,7 +112,6 @@ const Product = ({ product, details, notify }) => {
               </div>
             </div>
 
-            {/* Trust hints */}
             <div className="flex flex-wrap gap-6 pt-4 text-sm text-slate-500">
               <span className="flex items-center gap-2">
                 <svg
@@ -162,7 +156,6 @@ const Product = ({ product, details, notify }) => {
 
   return (
     <div className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 hover:border-slate-300 hover:shadow-xl transition-all duration-300 flex flex-col h-full">
-      {/* Image - square aspect, image-first */}
       <Link
         to={`/product/${serialNum}`}
         className="block relative aspect-square bg-slate-50 overflow-hidden cursor-pointer shrink-0"
@@ -174,7 +167,6 @@ const Product = ({ product, details, notify }) => {
         />
       </Link>
 
-      {/* Content - flex to push actions to bottom */}
       <div className="p-4 md:p-5 flex flex-col flex-1 min-h-0">
         <Link to={`/product/${serialNum}`} className="cursor-pointer">
           <h3 className="font-medium text-slate-900 line-clamp-2 mb-2 hover:text-teal-600 transition-colors">

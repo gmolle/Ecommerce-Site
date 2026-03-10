@@ -74,7 +74,6 @@ const ProductDetailsPage = () => {
     <div className="max-w-7xl mx-auto px-4 md:px-6 pb-16">
       <ToastContainer position="top-left" autoClose={4000} transition={Slide} />
 
-      {/* Breadcrumb */}
       <nav className="py-6 text-sm">
         <ol className="flex flex-wrap items-center gap-2 text-slate-500">
           <li>
@@ -104,7 +103,6 @@ const ProductDetailsPage = () => {
         </ol>
       </nav>
 
-      {/* Main product */}
       {!loading && (
         <div className="mb-20">
           <Product
@@ -115,7 +113,6 @@ const ProductDetailsPage = () => {
         </div>
       )}
 
-      {/* Related products */}
       <section className="border-t border-slate-200 pt-16">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
           <div>

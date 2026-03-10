@@ -15,7 +15,6 @@ const ProductModal = ({ product, onClose }) => {
   const [quantity, setQuantity] = useState(product?.quantity || "");
   const [image, setImage] = useState(product?.image || "");
 
-  // Lock body scroll when modal is open; scrollbar-gutter: stable on html prevents layout shift
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";

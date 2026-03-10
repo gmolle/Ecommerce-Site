@@ -35,7 +35,6 @@ const ProductsPage = () => {
 
   const notifyAdded = () => toast.success("Added to cart", { theme: "dark" });
 
-  // Sync state from URL params on mount or URL changes
   useEffect(() => {
     const categoryFromURL = searchParams.get("category") || "all";
     const sortFromURL = searchParams.get("sort") || "default";
@@ -75,7 +74,6 @@ const ProductsPage = () => {
     }
   }, [searchParams, dispatch, allProducts.length]);
 
-  // Prevent background scroll when filter sidebar is open
   useEffect(() => {
     document.body.style.overflow = filterOpen ? "hidden" : "";
     return () => {
@@ -83,7 +81,6 @@ const ProductsPage = () => {
     };
   }, [filterOpen]);
 
-  // Helper to update URL search params
   const updateSearchParams = (updates) => {
     setSearchParams((prev) => {
       const params = new URLSearchParams(prev);
@@ -104,15 +101,11 @@ const ProductsPage = () => {
     });
   };
 
-  // Handlers updating state and URL params:
-
   const handleCategoryChange = (newCategory) => {
     dispatch(setCategoryFilter(newCategory));
-    // Reset items and keep other filters
     updateSearchParams({
       category: newCategory !== "all" ? newCategory : null,
       items: DEFAULT_ITEMS_TO_SHOW,
-      // Keep current sort, price, search from state
       sort: sortOrder !== "default" ? sortOrder : null,
       price:
         priceFilter[0] !== DEFAULT_PRICE_RANGE[0] ||
@@ -159,7 +152,6 @@ const ProductsPage = () => {
   const handleSearchChange = (e) => {
     const val = e.target.value;
     setSearchTerm(val);
-    // Don't update URL on every keystroke — update after debounce or on blur (for simplicity here, on every change)
     updateSearchParams({
       search: val.trim() !== "" ? val.trim() : null,
       items: DEFAULT_ITEMS_TO_SHOW,
@@ -190,7 +182,6 @@ const ProductsPage = () => {
     });
   };
 
-  // Filter products by search term
   const filteredByCategory =
     categoryFilter === "all"
       ? allProducts
@@ -242,9 +233,7 @@ const ProductsPage = () => {
     <div className="w-full min-w-full py-8 md:py-10 mb-16">
       <ToastContainer position="top-left" autoClose={4000} transition={Slide} />
 
-      {/* Inner container: same as navbar so content aligns left/right */}
       <div className="site-container">
-      {/* Header + Search */}
       <div className="mb-8">
         <h1 className="text-2xl md:text-3xl font-bold text-slate-900">Products</h1>
         <p className="text-slate-500 mt-0.5 mb-6">
@@ -304,9 +293,7 @@ const ProductsPage = () => {
         </div>
       </div>
 
-      {/* Sidebar + Products: grid keeps product column width fixed (1fr) so no shift when empty */}
       <div className="grid grid-cols-1 md:grid-cols-[14rem_1fr] gap-8 w-full">
-        {/* Filters Sidebar - desktop */}
         <aside
           className={`
             hidden md:block w-56 min-w-0
@@ -352,7 +339,6 @@ const ProductsPage = () => {
           </div>
         </aside>
 
-        {/* Mobile filter panel */}
         {filterOpen && (
           <>
             <div
@@ -400,7 +386,6 @@ const ProductsPage = () => {
           </>
         )}
 
-        {/* Products: grid column 1fr = always same width, no shrink when empty */}
         <main className="min-w-0 overflow-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch w-full">
             {errorMsg ? (
